@@ -1,0 +1,22 @@
+zh:
+  articles:
+    show:
+      title: "标题"
+      text: "内容"
+
+#      映射到views/articles/show.html.erb
+#      commenter: "评论人"
+#      body: "内容"
+#      created_at: "创建时间"
+
+#    映射到views/articles/_comments.html.erb
+#    comments:
+#      commenter: "评论人"
+#      body: "内容"
+#      created_at: "创建时间"
+
+#   映射到views/articles/_comment.html.erb
+    comment:
+      commenter: "评论人"
+      body: "内容"
+      created_at: "创建时间"

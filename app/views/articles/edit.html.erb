@@ -1,0 +1,49 @@
+<h1>Edit Article #<%= @article.id %></h1>
+
+<!--
+<form action="/articles/5" accept-charset="UTF-8" method="post">
+    <input name="utf8" type="hidden" value="&#x2713;" />
+    <input type="hidden" name="_method" value="patch" />
+    <input type="hidden" name="authenticity_token" value="059/6RZ1qGWtFX2laxNp2lDLaamri/YppPDRuJNP3XQkcQnWe9W8y6KGGMgxhIpHYV7dRktnhlQX2y/VGHabKg==" />
+
+    <label for="article_title">Title</label>
+    <input type="text" value="a" name="article[title]" id="article_title" />
+
+    <label for="article_text">Text</label>
+    <textarea name="article[text]" id="article_text">
+b</textarea>
+
+    <input type="submit" name="commit" value="提交" />
+</form>
+-->
+
+<!--
+<%#= form_for :my_article, url: articles_path, method: :patch do |f| %>
+<%= form_for :article, url: article_path(@article), method: :patch do |f| %>
+<%#= form_for @article do |f| %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+
+    <%= f.submit('提交') %>
+<% end %>
+-->
+
+<%= render 'form' %>
+
+<!--
+why framework adds <div class="field_with_errors"> for me when errors occur???
+-->
+<% if @article.errors.any? %>
+  <ul>
+    <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%#= link_to 'Back', @article %>
+<%= link_to 'Back', articles_path, class: 'btn btn-default' %>

@@ -1,0 +1,48 @@
+<h1>New Article</h1>
+
+<!--
+<form action="/articles" accept-charset="UTF-8" method="post">
+  <input name="utf8" type="hidden" value="&#x2713;" />
+  <input type="hidden" name="authenticity_token" value="7iuEmqhm3BGZN7HTh/VSLxrERJ1B33SIiWTTwYDsLlkZxfKlxcbIv5ak1L7dYrGyK1HwcqEzBPU6Ty2sC9VoBw==" />
+
+  <label for="my_article_title">Title</label>
+  <input type="text" name="my_article[title]" id="my_article_title" />
+
+  <label for="my_article_text">Text</label>
+  <textarea name="my_article[text]" id="my_article_text">
+  </textarea>
+
+  <input type="submit" name="commit" value="提交" />
+</form>
+-->
+
+<!--
+<%#= form_for :my_article, url: articles_path, method: :post do |f| %>
+<%= form_for :article, url: articles_path, method: :post do |f| %>
+<%#= form_for @article do |f| %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+
+    <%= f.submit('提交') %>
+<% end %>
+-->
+
+<%= render 'form' %>
+
+<!--
+why framework adds <div class="field_with_errors"> for me when errors occur???
+-->
+<% if @article.errors.any? %>
+  <ul>
+    <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%#= link_to 'Back', @article %>
+<%= link_to 'Back', articles_path %>

@@ -1,0 +1,30 @@
+<%= content_for :title do %>
+    <title>Tags</title>
+<% end %>
+
+<h1>All Tags</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Ops</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.id %></td>
+        <!--必须用size不能用count，size才会判断has_cached_counter?-->
+        <td><%= tag.name %>(<%= tag.articles.size %>)</td>
+        <td>
+          <%= link_to 'Edit', edit_tag_path(tag) %>
+          <%= link_to 'Delete', tag_path(tag), method: :delete %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_tag_path %>

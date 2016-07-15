@@ -1,0 +1,16 @@
+<p>
+  <strong><%= t('.commenter') %>:</strong>
+  <%= comment.commenter %>
+</p>
+
+<p>
+  <strong><%= t('.body') %>:</strong>
+  <%= comment.body %>
+</p>
+
+<p>
+  <strong><%= t('.created_at') %>:</strong>
+  <%= l comment.created_at, format: :long %>
+</p>
+
+<%= link_to "Delete", article_comment_path(article, comment), { method: :delete, data: { confirm: 'Are you sure?' } } %>

@@ -1,0 +1,9 @@
+//alert('hello');
+//alert("<%#= j render 'comments' %>");//不加escape_javascript不会输出js字符串
+$("#show_more_link").remove();
+
+<!-- 这里路径可以不写全，因为渲染show_more页面的是自己的controller -->
+$("#ajax_comments").append("<%= j render(partial: 'comments', locals: { article: @article, comments: @comments }) %>");
+//$("#ajax_comments").append("<%#= j render(partial: 'articles/comments', locals: { article: @article, comments: @comments }) %>");
+
+

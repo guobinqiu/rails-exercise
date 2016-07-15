@@ -1,0 +1,14 @@
+<%= flash[:alert] if flash[:alert] %>
+
+<%= form_for @tag do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+<% end %>
+
+<% if @tag.errors.any? %>
+    <ul>
+      <% @tag.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>

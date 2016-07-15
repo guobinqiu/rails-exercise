@@ -1,0 +1,2 @@
+<!-- 由于该页面会被多个controller共享，所以路径要写全，否则只有自己的controller能找到，其他的controller都找不到它 -->
+$("#ajax_comments").html("<%= j render(partial: 'articles/comments', locals: { article: @article, comments: @comments }) %>");

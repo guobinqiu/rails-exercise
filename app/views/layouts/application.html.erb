@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= yield :title %><!--标题, 运行时会替换成每个页面各自的content_for :title块里的内容-->
+  <%= yield :meta %><!--SEO-->
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<!--页头开始-->
+<%= render 'layouts/header' %>
+<!--页头结束-->
+<!--正文开始-->
+<%= yield %>
+<!--正文结束-->
+<!--页脚开始-->
+<%= render 'layouts/footer' %>
+<!--页脚结束-->
+<!--js开始-->
+<%= yield :js %>
+<!--js结束-->
+</body>
+</html>

@@ -1,0 +1,78 @@
+<p>
+  <!--<strong><%= t('show.title', scope: [:articles]) %>:</strong>-->
+  <!--<strong><%= t(:title, scope: [:articles, :show]) %>:</strong>-->
+  <!--<strong><%= t('articles.show.title') %>:</strong>-->
+  <strong><%= t('.title') %>:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong><%= t('.text') %>:</strong>
+  <%= @article.text %>
+</p>
+
+
+<h2>Comments</h2>
+<div id="ajax_comments">
+  <%= render partial: 'articles/comments', locals: { article: @article, comments: @comments } %>
+</div>
+
+
+
+<h2>Add a comment:</h2>
+<%#= form_for([@article, @article.comments.build]) do |f| %>
+<%#= form_for :comment, url: article_comments_path(@article), method: :post do |f| %>
+
+<!-- 下两种写法才会自动绑定到model的翻译文件 -->
+<%#= form_for Comment.new, url: article_comments_path(@article), method: :post do |f| %>
+
+<%#= form_for [@article, @article.comments.build] do |f| %>
+<!--把新增评论也变成Ajax的-->
+<%= form_for [@article, @article.comments.build], remote: true do |f| %>
+      <%= f.label :commenter %>
+      <%= f.text_field :commenter %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+
+      <%= f.submit("提交")%>
+<% end %>
+
+<%= link_to 'Edit', edit_article_path(@article) %>
+<%= link_to 'Back', articles_path %>
+
+
+<input type="button" id="json_btn" value="测试返回json" />
+<input type="button" id="js_btn" value="测试返回js" />
+
+<script>
+  $(function(){
+      $("#json_btn").click(function(){
+          $.ajax({
+              url: "<%= test_json_articles_path %>",
+              type: "GET",
+              data_type: "json",
+              success: function(data){
+                  alert(JSON.stringify(data));
+              },
+              error: function(){
+                  alert("error");
+              }
+          });
+      });
+      $("#js_btn").click(function(){
+          $.ajax({
+              url: "<%= test_js_articles_path %>",
+              type: "GET",
+              data_type: "script"
+              //无需下面这种方式的回调，rails已经在服务端处理掉了回调工作
+//              ,success: function(data){
+//                  alert("hello");
+//              },
+//              error: function(){
+//                  alert("error");
+//              }
+          });
+      });
+  });
+</script>

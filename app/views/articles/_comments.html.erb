@@ -1,0 +1,11 @@
+<%# comments.each do |comment| %>
+    <%#= render partial: 'articles/comment', locals: { comment: comment, article: article } %>
+<%# end %>
+
+<!-- render collection可以省略foreach遍历，这里有过度重构的嫌疑 -->
+<%= render partial: 'articles/comment', collection: comments, locals: { article: article } %>
+
+<%#= link_to_next_page comments, 'Show More', { remote: true, params: {controller: 'articles', action: 'show_more'}, id: 'show_more_link' } %>
+
+<!-- 从CommentsController传过来的参数只有article_id，没有id值，所以这里需要把id赋值回来 -->
+<%= link_to_next_page comments, 'Show More', { remote: true, params: {controller: 'articles', action: 'show_more', id: params[:id] || params[:article_id]}, id: 'show_more_link' } %>

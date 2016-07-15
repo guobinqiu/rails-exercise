@@ -1,0 +1,10 @@
+<h1>Here is header area</h1>
+
+<% if current_user %>
+    <%= link_to current_user.name, '#' %>
+    <%= link_to current_user.auth_token, '#' %>
+    <%= link_to 'logout', logout_users_path, method: :delete %>
+<% else %>
+    <%= link_to "signup", signup_users_path %>
+    <%= link_to "login", login_users_path %>
+<% end %>

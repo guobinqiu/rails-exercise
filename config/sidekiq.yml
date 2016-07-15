@@ -1,0 +1,30 @@
+#https://github.com/mperham/sidekiq/wiki/Advanced-Options
+
+#Guobins-MacBook-Pro-3:demo guobin$ sidekiq --help
+#2016-02-05T03:21:52.287Z 1491 TID-ouu4uprrs INFO: sidekiq [options]
+#    -c, --concurrency INT            processor threads to use
+#    -d, --daemon                     Daemonize process
+#    -e, --environment ENV            Application environment
+#    -g, --tag TAG                    Process tag for procline
+#    -i, --index INT                  unique process index on this machine
+#    -q, --queue QUEUE[,WEIGHT]       Queues to process with optional weights
+#    -r, --require [PATH|DIR]         Location of Rails application with workers or file to require
+#    -t, --timeout NUM                Shutdown timeout
+#    -v, --verbose                    Print more verbose output
+#    -C, --config PATH                path to YAML config file
+#    -L, --logfile PATH               path to writable logfile
+#    -P, --pidfile PATH               path to pidfile
+#    -V, --version                    Print version and exit
+#    -h, --help                       Show help
+:verbose: false
+:concurrency: 5
+:timeout: 30
+:pidfile: tmp/pids/sidekiq.pid
+:logfile: log/sidekiq.log
+production:
+  :concurrency: 20
+
+#bundle exec sidekiq -q default -q mailers
+:queues:
+  - default
+  - mailers

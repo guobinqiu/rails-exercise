@@ -1,0 +1,8 @@
+zh:
+  activerecord:
+    models:
+      comment: "评论"
+    attributes:
+      comment:
+        commenter: "评论人"
+        body: "评论内容"

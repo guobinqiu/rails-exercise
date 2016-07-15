@@ -1,0 +1,58 @@
+<%= content_for :title do %>
+    <title>Articles</title>
+<% end %>
+
+<h1>Listing articles</h1>
+
+<%= link_to 'New', new_article_path %>
+
+<!--因为没有model，所以使用普通表单-->
+<%= form_tag search_articles_path, method: :get do %>
+    <%= search_field_tag('search', params[:search], { placeholder: '在这里输入查询关键字' }) %>
+    <%= submit_tag('搜索') %>
+<% end %>
+
+<%# cache ["articles/list", @articles.map(&:updated_at).max.to_s(:number)] do %>
+<%# cache_if @articles.any?, ["articles/list", @articles.map(&:updated_at).max.try(:to_s, :number)] do %>
+<%# cache_if @articles.any?, cache_key_for_articles_list(@articles, params[:search]) do %>
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Text</th>
+      <th></th>
+      <th colspan="10">Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @articles.each do |article| %>
+        <%# cache article do %><!--套娃缓存性能并不高，过多的io-->
+        <tr>
+          <td><%= article.id %></td>
+          <td><%= article.title %></td>
+          <td><%= article.text %></td>
+          <!--必须用size不能用count，size才会判断has_cached_counter?-->
+          <td><%#= article.comments.map(&:commenter) %><%= article.comments.size %></td><!-- 这个地方可能产生n+1查询 -->
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Show', article_path(article) %></td>
+          <td><%= link_to 'Delete', article_path(article), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        </tr>
+        <%# end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<%# end %>
+
+<!-- https://github.com/amatsuda/kaminari -->
+<%#= paginate @articles, window: 2, :param_name => :pg %>
+<%= paginate @articles %>
+
+<%#= request.params %>
+<%= link_to_previous_page @articles, 'Previous Page', params: params.merge!(request.params) %>
+<%= link_to_next_page @articles, 'Next Page', params: params.merge!(request.params) %>
+
+<%= page_entries_info @articles, entry_name: '' %>

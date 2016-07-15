@@ -1,0 +1,26 @@
+<%#= form_for('/users/create_login_session', method: :post, authenticity_token: true) do %>
+<%#= form_tag({controller: 'users', action: 'create_login_session'}, method: :post, authenticity_token: true) do %>
+<%#= form_tag('/users/create_login_session', method: :post, authenticity_token: true) do %>
+<%= form_tag(create_login_session_users_path, method: :post, authenticity_token: true) do %>
+    <%= label_tag :name, '用户名' %>
+    <%= text_field_tag 'user[name]' %>
+
+    <%= label_tag :password, '密码' %>
+    <%= password_field_tag 'user[password]' %>
+
+    <%= submit_tag '登录' %>
+<% end %>
+
+<%= link_to 'javascript:void(0)', id: 'qq_login' do %>
+    <%= image_tag "Connect_logo_5.png" %>
+<% end %>
+
+<%= content_for :js do %>
+<script>
+    $(function(){
+        $('#qq_login').click(function(){
+            window.open("/auth/qq");
+        });
+    });
+</script>
+<% end %>

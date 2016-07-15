@@ -1,0 +1,28 @@
+<%= content_for :title do %>
+    <title>Users</title>
+<% end %>
+
+<h1>All Users</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>name</th>
+    <th>email</th>
+    <th>Ops</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_user_path(user) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

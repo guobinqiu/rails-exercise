@@ -1,0 +1,100 @@
+<%= form_for @article do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, {class: 'form_control'} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :text %>
+      <%= f.text_area :text, {class: 'form_control', size: '60x12'} %>
+    </div>
+
+
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%#= f.text_field :email %>   <!-- 表单有对应的模型对象，key名固定为模型名 -->
+    <%#= text_field :article, :email %> <!-- 亦是表单有对应的模型对象，可自定义key名 -->
+    <%#= text_field_tag 'article[email]', @article.email %> <!-- 无模型对象表单 -->
+
+
+
+    <%= f.label :email_confirmation %>
+    <%= f.email_field :email_confirmation %>
+    <%#= f.text_field :email_confirmation %>
+    <%#= text_field :article, :email_confirmation %>
+    <%#= text_field_tag 'article[email_confirmation]' %>
+
+<!--
+ouputs:
+    <input type="checkbox" value="1" name="article[terms_of_service]" id="article_terms_of_service" />
+-->
+    <%= f.check_box :terms_of_service, {checked: true} %>
+    <%#= check_box :article, :terms_of_service %>
+    <%#= check_box_tag 'article[terms_of_service]' %>
+<!--
+Outputs:
+<label for="article_terms_of_service">服务条款</label>
+-->
+    <%= f.label :terms_of_service, '服务条款' %>
+    <%#= f.label :terms_of_service %>
+
+    <!--def check_box_tag(name, value = "1", checked = false, options = {})-->
+    <% @tags.each do |tag| %>
+        <%= check_box_tag 'article[tag_ids][]', tag.id, @article.tags.include?(tag), {id: dom_id(tag)} %>
+        <%= label_tag dom_id(tag), tag.name %>
+    <% end %>
+
+    <!--
+    复选按钮可以直接转成单选按钮，只不过name数组里只存一个值而已
+    -->
+    <!--
+    <%# @tags.each do |tag| %>
+        <%#= radio_button_tag 'article[tag_ids][]', tag.id, @article.tags.include?(tag), {id: dom_id(tag)} %>
+        <%#= label_tag dom_id(tag), tag.name %>
+    <%# end %>
+    -->
+
+
+    <!--
+    下拉框的多种写法，效果是一样的
+    -->
+    <%#= select_tag 'article[tag_ids][]', '<option value="1">计算机</option><option value="2" selected>英语</option>'.html_safe %>
+    <%#= select_tag 'article[tag_ids][]', options_for_select([['计算机', 1], ['英语', 2]], 2) %>
+    <%#= select_tag 'article[tag_ids][]', options_for_select({'计算机' => 1, '英语' => 2}, 2) %>
+    <%#= select_tag 'article[tag_ids][]', options_for_select({计算机: 1, 英语: 2}, 2) %>
+    <%#= select_tag 'article[tag_ids][]', options_for_select(@tags.map { |tag| [tag.name, tag.id] }, 2) %>
+    <%#= select_tag 'article[tag_ids][]', options_from_collection_for_select(@tags, :id, :name, 2) %>
+
+    <%= f.label :state %>
+    <%= f.select :state, options_for_select([['active', 1], ['inactive', 0]], @article.state) %>
+
+    <!--关联保存-->
+    <%#= f.fields_for :comments, @article.comments do |ff| %>
+    <%= f.fields_for :comments do |ff| %>
+        <%= ff.label :commenter %>
+        <%= ff.text_field :commenter %>
+
+        <%= ff.label :body %>
+        <%= ff.text_area :body %>
+    <% end %>
+
+    <%= f.submit '提交', class: 'btn btn-primary' %>
+<% end %>
+
+
+  <!--text_area_tag: <%= text_area_tag(:message, "Hi, nice site", size: "24x6") %><br>-->
+  <!--password_field_tag: <%= password_field_tag(:password) %><br>-->
+  <!--hidden_field_tag: <%= hidden_field_tag(:parent_id, "5") %><br>-->
+  <!--search_field:<%= search_field(:user, :name) %><br>-->
+  <!--telephone_field:<%= telephone_field(:user, :phone) %><br>-->
+  <!--date_field:<%= date_field(:user, :born_on) %><br>-->
+  <!--datetime_field:<%= datetime_field(:user, :meeting_time) %><br>-->
+  <!--datetime_local_field:<%= datetime_local_field(:user, :graduation_day) %><br>-->
+  <!--month_field:<%= month_field(:user, :birthday_month) %><br>-->
+  <!--week_field:<%= week_field(:user, :birthday_week) %><br>-->
+  <!--url_field:<%= url_field(:user, :homepage) %><br>-->
+  <!--email_field:<%= email_field(:user, :address) %><br>-->
+  <!--color_field:<%= color_field(:user, :favorite_color) %><br>-->
+  <!--time_field:<%= time_field(:task, :started_at) %><br>-->
+  <!--number_field:<%= number_field(:product, :price, in: 1.0..20.0, step: 0.5) %><br>-->
+  <!--range_field:<%= range_field(:product, :discount, in: 1..100) %><br>-->

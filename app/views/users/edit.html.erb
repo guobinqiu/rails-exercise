@@ -1,0 +1,69 @@
+edit user<br>
+
+
+------------------------------------------------------------ Show Avatar Pics ------------------------------------------------------------
+<div>
+  user.avatar.url: <%= @user.avatar.url %>
+  <br>
+  user.avatar.current_path: <%= @user.avatar.current_path %>
+  <br>
+  user.avatar_identifier: <%= @user.avatar_identifier %>
+  <br>
+
+  <% unless @user.avatar.nil? %>
+      original:<%= image_tag(@user.avatar.url) %>
+      small:<%= image_tag(@user.avatar.small.url) %>
+      medium:<%= image_tag(@user.avatar.medium.url) %>
+      large:<%= image_tag(@user.avatar.large.url) %>
+  <% end %>
+</div>
+
+----------------------------------------------------------- Show Imageable Pics ----------------------------------------------------------
+<div>
+  <% unless @user.picture.nil? %>
+      original:<%= image_tag(@user.picture.name.url) %>
+      small:<%= image_tag(@user.picture.name.small.url) %>
+      medium:<%= image_tag(@user.picture.name.medium.url) %>
+      large:<%= image_tag(@user.picture.name.large.url) %>
+  <% end %>
+</div>
+
+
+<%#= form_for @user, html: { multipart: true }  do |f| %>
+<%#= f.file_field :avatar %>
+<%#= f.text_field :name %>
+<%#= f.text_field :email %>
+<%#= f.submit %>
+<%# end %>
+
+<!-- 同时使用两种方式上传图片 -->
+<%= form_for @user do |f| %>
+    <%= f.fields_for :picture, @picture do |ff| %>
+        <%= ff.label :name, 'Imageable' %><%= ff.file_field :name %>
+        <%= ff.hidden_field :imageable_id %><!--可省略-->
+        <%= ff.hidden_field :imageable_type %><!--可省略-->
+    <% end %>
+    <%= f.label :avatar %><%= f.file_field :avatar %>
+    <%= f.label :name %><%= f.text_field :name %>
+    <%= f.label :email %><%= f.text_field :email %>
+    <%= f.submit %>
+<% end %>
+
+<% if @user.errors.any? %>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+
+----------------------------------------------------------- Ajax Fileupload ----------------------------------------------------------
+<%= form_for @user, url: upload_user_path, remote: true do |f| %>
+    <%= f.label :avatar %><%= f.file_field :avatar %>
+    <%= f.submit 'Upload' %>
+<% end %>
+
+<div id="image_box">
+  <%= render 'image' %>
+</div>

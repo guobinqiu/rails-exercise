@@ -1,0 +1,28 @@
+zh:
+  activerecord:
+    models:
+      article: "文章"
+    attributes:
+      article:
+        title: "标题"
+        text: "内容"
+        author: "作者"
+        email: "邮箱"
+        email_confirmation: "确认邮箱"
+        state: "状态"
+      article/comments:
+        commenter: "评论人"
+        body: "评论内容"
+    errors:
+      models:
+        article:
+          attributes:
+            text:
+              blank: "不能为空！！！" #覆盖全局的设置(rails.yml)
+
+#搜索路径
+#              activerecord.errors.models.[model_name].attributes.[attribute_name]
+#              activerecord.errors.models.[model_name]
+#              activerecord.errors.messages
+#              errors.attributes.[attribute_name]
+#              errors.messages
