@@ -1,3 +1,6 @@
+随便玩玩
+===
+
 # 创建controller
 rails generate controller Articles
 
