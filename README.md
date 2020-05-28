@@ -1,4 +1,4 @@
-随便玩玩
+Demo for Ruby on Rails
 ===
 
 # 创建controller
@@ -34,28 +34,3 @@ rails g mailer UserMailer
 
 # 微信登录
 http://www.ngrok.cc/
-
-# 导入Bootstrap
-Actually you don't need gem for this, here is the step to install Bootstrap 3 in RoR
-
-Download Bootstrap
-
-Copy:
-
-bootstrap/dist/css/bootstrap.css and bootstrap/dist/css/bootstrap.min.css
-
-To: vendor/assets/stylesheets
-
-Copy:
-
-bootstrap/dist/js/bootstrap.js and bootstrap/dist/js/bootstrap.min.js
-
-To: vendor/assets/javascripts
-
-Update: app/assets/stylesheets/application.css by adding:
-
-*= require bootstrap.min
-Update: app/assets/javascripts/application.jsby adding:
-
-//= require bootstrap.min
-With this you can update bootstrap any time you want, don't need to wait gem to be updated. Also with this approach assets pipeline will use minified versions in production.
