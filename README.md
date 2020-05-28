@@ -1,5 +1,5 @@
 Ruby on Rails
-===
+---
 
 # 创建controller
 rails generate controller Articles
@@ -32,5 +32,3 @@ rails g migration CreatePictures name:string imageable_id:integer imageable_type
 # 邮件
 rails g mailer UserMailer
 
-# 微信登录
-http://www.ngrok.cc/
