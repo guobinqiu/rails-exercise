@@ -1,4 +1,4 @@
-Demo for Ruby on Rails
+Ruby on Rails
 ===
 
 # 创建controller
